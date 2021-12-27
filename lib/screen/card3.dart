@@ -12,7 +12,7 @@ class Card3 extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/mag2.png"),
+            image: AssetImage("assets/sample_pics/mag2.png"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(

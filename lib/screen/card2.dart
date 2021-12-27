@@ -13,7 +13,7 @@ class Card2 extends StatelessWidget {
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/mag5.png"),
+            image: AssetImage("assets/sample_pics/mag5.png"),
             fit: BoxFit.cover,
           ),
           borderRadius: BorderRadius.all(
@@ -26,7 +26,7 @@ class Card2 extends StatelessWidget {
             AuthorCard(
               authorName: 'Mike Katz',
               title: 'Smoothie Connoisseur',
-              imageProvider: AssetImage('assets/author_katz.jpeg'),
+              imageProvider: AssetImage('assets/sample_pics/author_katz.jpeg'),
             ),
 
             // 4 add Positional text
