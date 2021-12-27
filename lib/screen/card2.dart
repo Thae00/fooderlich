@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/auth/author_card.dart';
+import 'package:fooderlich/theme/fooderlich_theme.dart';
 
 class Card2 extends StatelessWidget {
   @override
@@ -29,6 +30,31 @@ class Card2 extends StatelessWidget {
             ),
 
             // 4 add Positional text
+            Expanded(
+              child: Stack(
+                children: [
+                  Positioned(
+                    right: 16,
+                    bottom: 16,
+                    child: Text(
+                      'Recipe',
+                      style: FooderlichTheme.lightTextTheme.headline1,
+                    ),
+                  ),
+                  Positioned(
+                    left: 16,
+                    bottom: 70,
+                    child: RotatedBox(
+                      quarterTurns: 3,
+                      child: Text(
+                        'Smoothies',
+                        style: FooderlichTheme.lightTextTheme.headline1,
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
           ],
         ),
       ),
