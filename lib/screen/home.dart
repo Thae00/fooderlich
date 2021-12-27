@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/screen/card1.dart';
 
 // 1
 class Home extends StatefulWidget {
@@ -11,9 +12,7 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
   static List<Widget> pages = [
     //Replace with Card
-    Container(
-      color: Colors.red,
-    ),
+    Card1(),
     //Replace with Card2
     Container(
       color: Colors.green,
