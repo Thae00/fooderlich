@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/screen/card1.dart';
 import 'package:fooderlich/screen/card2.dart';
+import 'package:fooderlich/screen/card3.dart';
 
 // 1
 class Home extends StatefulWidget {
@@ -17,9 +18,7 @@ class _HomeState extends State<Home> {
     //Replace with Card2
     Card2(),
     //Replace with Card3
-    Container(
-      color: Colors.blue,
-    ),
+    Card3(),
   ];
 
   void _onItemTapped(int index) {
