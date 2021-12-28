@@ -25,10 +25,7 @@ class ExploreScreen extends StatelessWidget {
                 height: 16,
               ),
               //Replace this with FriendPostListView
-              Container(
-                height: 400,
-                color: Colors.green,
-              ),
+              FriendPostListView(friendPosts: snapshot.data?.friendPosts ?? []),
             ],
           );
         } else {
