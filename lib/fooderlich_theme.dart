@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class FooderlichTheme {
-  // 1
   static TextTheme lightTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -31,7 +30,6 @@ class FooderlichTheme {
     ),
   );
 
-  // 2
   static TextTheme darkTextTheme = TextTheme(
     bodyText1: GoogleFonts.openSans(
       fontSize: 14.0,
@@ -60,33 +58,29 @@ class FooderlichTheme {
     ),
   );
 
-  // 3
   static ThemeData light() {
     return ThemeData(
       brightness: Brightness.light,
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateColor.resolveWith(
-          (states) {
-            return Colors.black;
-          },
-        ),
+        fillColor: MaterialStateColor.resolveWith((states) {
+          return Colors.black;
+        }),
       ),
-      appBarTheme: AppBarTheme(
+      appBarTheme: const AppBarTheme(
         foregroundColor: Colors.black,
         backgroundColor: Colors.white,
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
         backgroundColor: Colors.black,
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.green,
       ),
       textTheme: lightTextTheme,
     );
   }
 
-  // 4
   static ThemeData dark() {
     return ThemeData(
       brightness: Brightness.dark,
@@ -94,11 +88,11 @@ class FooderlichTheme {
         foregroundColor: Colors.white,
         backgroundColor: Colors.grey[900],
       ),
-      floatingActionButtonTheme: FloatingActionButtonThemeData(
+      floatingActionButtonTheme: const FloatingActionButtonThemeData(
         foregroundColor: Colors.white,
         backgroundColor: Colors.green,
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         selectedItemColor: Colors.green,
       ),
       textTheme: darkTextTheme,

@@ -1,65 +1,61 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/theme/fooderlich_theme.dart';
+
+import '../fooderlich_theme.dart';
+import '../models/models.dart';
 
 class Card1 extends StatelessWidget {
-  // 1
-  final String category = 'Editor\'s Choice';
-  final String title = 'The Art of Dough';
-  final String description = 'Learn to make the perfect bread.';
-  final String chef = 'Ray Wenderlich';
+  final ExploreRecipe recipe;
 
-  // 2
+  Card1({
+    required this.recipe,
+  });
+
   @override
   Widget build(BuildContext context) {
-    // 3
     return Center(
-      // Card1 Decorate Container
       child: Container(
-        width: 350,
-        height: 450,
-        //Add a stack of text => stack => Layers widgets on top of each other
         child: Stack(
           children: [
             Text(
-              category,
+              recipe.subtitle,
               style: FooderlichTheme.darkTextTheme.bodyText1,
             ),
             Positioned(
+              child: Text(
+                recipe.title,
+                style: FooderlichTheme.darkTextTheme.headline2,
+              ),
               top: 20,
-              child: Text(
-                title,
-                style: FooderlichTheme.darkTextTheme.headline5,
-              ),
             ),
             Positioned(
-              right: 0,
+              child: Text(
+                recipe.message,
+                style: FooderlichTheme.darkTextTheme.bodyText1,
+              ),
               bottom: 30,
-              child: Text(
-                description,
-                style: FooderlichTheme.darkTextTheme.bodyText1,
-              ),
+              right: 0,
             ),
             Positioned(
-              right: 0,
-              bottom: 10,
               child: Text(
-                chef,
+                recipe.authorName,
                 style: FooderlichTheme.darkTextTheme.bodyText1,
               ),
-            ),
+              bottom: 10,
+              right: 0,
+            )
           ],
         ),
         padding: EdgeInsets.all(16),
-        constraints: const BoxConstraints.expand(
+        constraints: BoxConstraints.expand(
           width: 350,
           height: 450,
         ),
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/sample_pics/mag1.png"),
+            image: AssetImage(recipe.backgroundImage),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10)),
+          borderRadius: BorderRadius.all(Radius.circular(10.0)),
         ),
       ),
     );

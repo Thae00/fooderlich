@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
 
-class ProfileImage extends StatelessWidget {
+class CircleImage extends StatelessWidget {
+  CircleImage({
+    this.imageProvider,
+    this.imageRadius = 20,
+  });
 
   final double imageRadius;
   final ImageProvider? imageProvider;
-  ProfileImage({this.imageRadius = 20, this.imageProvider});
 
   @override
   Widget build(BuildContext context) {
