@@ -10,6 +10,7 @@ class FriendPostTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
+      mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CircleImage(
           imageProvider: AssetImage(post.profileImageUrl),

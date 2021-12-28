@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/screens/explore_screen.dart';
+import 'package:fooderlich/screens/recipes_screen.dart';
 
 class Home extends StatefulWidget {
   @override
@@ -12,8 +13,8 @@ class _HomeState extends State<Home> {
   static List<Widget> pages = <Widget>[
     // Replace with ExploreScreen
     ExploreScreen(),
-    // TODO: Replace with RecipesScreen
-    Container(color: Colors.green),
+    //  Replace with RecipesScreen
+    RecipesScreen(),
     Container(color: Colors.blue),
   ];
 
