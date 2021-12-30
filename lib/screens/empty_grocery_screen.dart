@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/models.dart';
+import 'package:provider/provider.dart';
 
 class EmptyGroceryScreen extends StatelessWidget {
   @override
@@ -38,6 +40,7 @@ class EmptyGroceryScreen extends StatelessWidget {
             MaterialButton(
               onPressed: () {
                 // Go to Recipes Tab
+                Provider.of<TabManager>(context, listen: false).gotoRecipes();
               },
               child: Text(
                 'Browse Recipes',
