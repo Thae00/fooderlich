@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/models/grocery_item.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:intl/intl.dart';
 
 class GroceryItemScreen extends StatefulWidget {
   final Function(GroceryItem) onCreate;
@@ -86,6 +87,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             // Add Importance selection
             buildImportanceField(),
             // Add date picker
+            buildDateField(context),
             // Add time picker
             // Add color picker
             // Add slider
@@ -184,7 +186,41 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
     );
   }
 
-  // TODO: ADD buildDateField()
+  // ADD buildDateField()
+  Widget buildDateField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Date',
+              style: GoogleFonts.lato(fontSize: 28),
+            ),
+            TextButton(
+              onPressed: () async {
+                final currentDate = DateTime.now();
+                final selectedDate = await showDatePicker(
+                  context: context,
+                  initialDate: currentDate,
+                  firstDate: currentDate,
+                  lastDate: DateTime(currentDate.year + 5),
+                );
+                setState(() {
+                  if (selectedDate != null) {
+                    _dueDate = selectedDate;
+                  }
+                });
+              },
+              child: Text('Select'),
+            ),
+          ],
+        ),
+        Text('${DateFormat('yyyy-MM-dd').format(_dueDate)}'),
+      ],
+    );
+  }
 
   // TODO: Add buildTimeField()
 
