@@ -55,8 +55,8 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
   //Add dispose()
   @override
   void dispose() {
-    super.dispose();
     _nameController.dispose();
+    super.dispose();
   }
 
   @override
@@ -81,21 +81,22 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
         padding: EdgeInsets.all(16.0),
         child: ListView(
           children: [
-            // TODO 13: Add name TextField
+            // Add name TextField
             buildNameField(),
-            // TODO 14: Add Importance selection
-            // TODO 15: Add date picker
-            // TODO 16: Add time picker
-            // TODO 17: Add color picker
-            // TODO 18: Add slider
-            // TODO: 19: Add Grocery Tile
+            // Add Importance selection
+            buildImportanceField(),
+            // Add date picker
+            // Add time picker
+            // Add color picker
+            // Add slider
+            //  Add Grocery Tile
           ],
         ),
       ),
     );
   }
 
-  // TODO: Add buildNameField()
+  //  Add buildNameField()
   Widget buildNameField() {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -124,7 +125,64 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
     );
   }
 
-  // TODO: Add buildImportanceField()
+  //  Add buildImportanceField()
+  Widget buildImportanceField() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Importance',
+          style: GoogleFonts.lato(fontSize: 28),
+        ),
+        Wrap(
+          spacing: 10,
+          children: [
+            ChoiceChip(
+              label: Text(
+                'low',
+                style: TextStyle(
+                  color: Colors.white,
+                ),
+              ),
+              selected: _importance == Importance.low,
+              selectedColor: Colors.black,
+              onSelected: (selected) {
+                setState(() {
+                  _importance = Importance.low;
+                });
+              },
+            ),
+            ChoiceChip(
+              label: Text(
+                'medium',
+                style: TextStyle(color: Colors.white),
+              ),
+              selected: _importance == Importance.medium,
+              selectedColor: Colors.black,
+              onSelected: (selected) {
+                setState(() {
+                  _importance = Importance.medium;
+                });
+              },
+            ),
+            ChoiceChip(
+              label: Text(
+                'high',
+                style: TextStyle(color: Colors.white),
+              ),
+              selected: _importance == Importance.high,
+              selectedColor: Colors.black,
+              onSelected: (selected) {
+                setState(() {
+                  _importance = Importance.high;
+                });
+              },
+            ),
+          ],
+        ),
+      ],
+    );
+  }
 
   // TODO: ADD buildDateField()
 
