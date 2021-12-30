@@ -89,6 +89,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             // Add date picker
             buildDateField(context),
             // Add time picker
+            buildTimeField(context),
             // Add color picker
             // Add slider
             //  Add Grocery Tile
@@ -223,6 +224,37 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
   }
 
   // TODO: Add buildTimeField()
+  Widget buildTimeField(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Text(
+              'Time of Day',
+              style: GoogleFonts.lato(fontSize: 28),
+            ),
+            TextButton(
+              onPressed: () async {
+                final timeOfDay = await showTimePicker(
+                  context: context,
+                  initialTime: TimeOfDay.now(),
+                );
+                setState(() {
+                  if (timeOfDay != null) {
+                    _timeOfDay = timeOfDay;
+                  }
+                });
+              },
+              child: Text('Select'),
+            ),
+          ],
+        ),
+        Text('${_timeOfDay.format(context)}'),
+      ],
+    );
+  }
 
   // TODO: Add buildColorPicker()
 
