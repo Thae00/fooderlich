@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import 'package:fooderlich/models/grocery_item.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:intl/intl.dart';
@@ -90,7 +91,11 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
             buildDateField(context),
             // Add time picker
             buildTimeField(context),
+            SizedBox(
+              height: 10,
+            ),
             // Add color picker
+            buildColorPicker(context),
             // Add slider
             //  Add Grocery Tile
           ],
@@ -223,7 +228,7 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
     );
   }
 
-  // TODO: Add buildTimeField()
+  //  Add buildTimeField()
   Widget buildTimeField(BuildContext context) {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
@@ -256,7 +261,58 @@ class _GroceryItemScreenState extends State<GroceryItemScreen> {
     );
   }
 
-  // TODO: Add buildColorPicker()
+  //  Add buildColorPicker()
+  Widget buildColorPicker(BuildContext context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [
+        Row(
+          children: [
+            Container(
+              height: 50,
+              width: 10,
+              color: _currentColor,
+            ),
+            SizedBox(
+              width: 8,
+            ),
+            Text(
+              'Color',
+              style: GoogleFonts.lato(fontSize: 28),
+            ),
+          ],
+        ),
+        TextButton(
+          onPressed: () {
+            showDialog(
+              context: context,
+              builder: (context) {
+                return AlertDialog(
+                  content: BlockPicker(
+                    pickerColor: Colors.white,
+                    onColorChanged: (color) {
+                      setState(() {
+                        _currentColor = color;
+                      });
+                    },
+                  ),
+                  actions: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.of(context).pop();
+                      },
+                      child: Text('Save'),
+                    ),
+                  ],
+                );
+              },
+            );
+          },
+          child: Text('Select'),
+        ),
+      ],
+    );
+  }
 
-  // TODO: Add buildQuantityField()
+  //  Add buildQuantityField()
 }
