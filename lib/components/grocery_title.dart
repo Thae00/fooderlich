@@ -17,47 +17,60 @@ class GroceryTitle extends StatelessWidget {
   Widget build(BuildContext context) {
     // Change this widget
     return SizedBox(
-        height: 100,
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: [
-            // Add Row to group (name, date, importance)
-            Row(
-              children: [
-                Container(
-                  width: 5,
-                  color: item.color,
-                ),
-                SizedBox(
-                  width: 15,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      item.name,
-                      style: GoogleFonts.lato(
-                        decoration: textDecoration,
-                        fontSize: 21,
-                        fontWeight: FontWeight.bold,
-                      ),
+      height: 100,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          // Add Row to group (name, date, importance)
+          Row(
+            children: [
+              Container(
+                width: 5,
+                color: item.color,
+              ),
+              SizedBox(
+                width: 15,
+              ),
+              Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    item.name,
+                    style: GoogleFonts.lato(
+                      decoration: textDecoration,
+                      fontSize: 21,
+                      fontWeight: FontWeight.bold,
                     ),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    buildDate(),
-                    SizedBox(
-                      height: 4,
-                    ),
-                    buildImportance(),
-                  ],
+                  ),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  buildDate(),
+                  SizedBox(
+                    height: 4,
+                  ),
+                  buildImportance(),
+                ],
+              ),
+            ],
+          ),
+          // Add Row to group(quantity, checkbox)
+          Row(
+            children: [
+              Text(
+                item.quantity.toString(),
+                style: GoogleFonts.lato(
+                  decoration: textDecoration,
+                  fontSize: 21,
                 ),
-              ],
-            ),
-            // Add Row to group(quantity, checkbox)
-          ],
-        ));
+              ),
+              buildCheckbox(),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 
   //Add BuildImportance()
