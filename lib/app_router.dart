@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/fooderlich_pages.dart';
 import 'package:fooderlich/models/models.dart';
 import 'package:fooderlich/screens/screens.dart';
 
@@ -58,7 +59,10 @@ class AppRouter extends RouterDelegate
     if (!route.didPop(result)) {
       return false;
     }
-    // TODO: Handle Onboarding and splash
+    //  Handle Onboarding and splash
+    if (route.settings.name == FooderlichPages.onboardingPath) {
+      appStateManager.logout();
+    }
     // TODO: Handle state when user closes grocery item screen
     // TODO: Handle state when user closes profile screen
     // TODO: Handle state when user closes WebView screen

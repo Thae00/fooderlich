@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/models/fooderlich_pages.dart';
+import 'package:fooderlich/models/models.dart';
+import 'package:provider/provider.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class OnboardingScreen extends StatefulWidget {
@@ -56,7 +58,9 @@ class _OnboardingScreenState extends State<OnboardingScreen> {
         MaterialButton(
           child: Text('Skip'),
           onPressed: () {
-            // TODO: Onboarding -> Navigate to home
+            // Onboarding -> Navigate to home
+            Provider.of<AppStateManager>(context, listen: false)
+                .completeOnboarding();
           },
         ),
       ],
