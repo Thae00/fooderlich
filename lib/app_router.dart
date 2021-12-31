@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:fooderlich/models/models.dart';
+import 'package:fooderlich/screens/screens.dart';
 
 class AppRouter extends RouterDelegate
     with ChangeNotifier, PopNavigatorRouterDelegateMixin {
@@ -35,7 +36,8 @@ class AppRouter extends RouterDelegate
       onPopPage: _handlePopPage,
       // 9
       pages: [
-        // TODO: Add SplashScreen
+        //  Add SplashScreen
+        if (!appStateManager.isInitialized) SplashScreen.page(),
         // TODO: Add LoginScreen
         // TODO: Add OnboardingScreen
         // TODO: Add Home
