@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/components/components.dart';
-import 'package:fooderlich/models/explore_recipe.dart';
+
+import '../components/components.dart';
+import '../models/models.dart';
 
 class TodayRecipeListView extends StatelessWidget {
   final List<ExploreRecipe> recipes;
-  TodayRecipeListView({required this.recipes});
+
+  TodayRecipeListView({
+    required this.recipes,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +27,11 @@ class TodayRecipeListView extends StatelessWidget {
           ),
           SizedBox(height: 16),
           Container(
-            height: 450,
-            //  Add ListView Here
+            height: 400,
             color: Colors.transparent,
             child: ListView.separated(
               scrollDirection: Axis.horizontal,
+              itemCount: recipes.length,
               itemBuilder: (context, index) {
                 final recipe = recipes[index];
                 return buildCard(recipe);
@@ -35,7 +39,6 @@ class TodayRecipeListView extends StatelessWidget {
               separatorBuilder: (context, index) {
                 return SizedBox(width: 16);
               },
-              itemCount: recipes.length,
             ),
           ),
         ],
@@ -43,7 +46,6 @@ class TodayRecipeListView extends StatelessWidget {
     );
   }
 
-  // Add buildCard() widget here
   Widget buildCard(ExploreRecipe recipe) {
     if (recipe.cardType == RecipeCardType.card1) {
       return Card1(recipe: recipe);
@@ -52,7 +54,7 @@ class TodayRecipeListView extends StatelessWidget {
     } else if (recipe.cardType == RecipeCardType.card3) {
       return Card3(recipe: recipe);
     } else {
-      throw Exception('This card doesn\'t exist yet');
+      throw Exception("This card doesn't exist yet");
     }
   }
 }

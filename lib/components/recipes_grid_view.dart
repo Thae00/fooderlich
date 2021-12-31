@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/components/components.dart';
-import 'package:fooderlich/models/models.dart';
+
+import '../components/components.dart';
+import '../models/models.dart';
 
 class RecipesGridView extends StatelessWidget {
   final List<SimpleRecipe> recipes;
-  RecipesGridView({required this.recipes});
+
+  RecipesGridView({
+    required this.recipes,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -16,10 +20,9 @@ class RecipesGridView extends StatelessWidget {
       ),
       child: GridView.builder(
         itemCount: recipes.length,
-        // gridDelegate:
-        //     SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 2),
-        gridDelegate:
-            SliverGridDelegateWithMaxCrossAxisExtent(maxCrossAxisExtent: 400.0),
+        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          crossAxisCount: 2,
+        ),
         itemBuilder: (context, index) {
           final simpleRecipe = recipes[index];
           return RecipeThumbnail(recipe: simpleRecipe);

@@ -24,7 +24,9 @@ class Card2 extends StatelessWidget {
             image: AssetImage(recipe.backgroundImage),
             fit: BoxFit.cover,
           ),
-          borderRadius: BorderRadius.all(Radius.circular(10.0)),
+          borderRadius: BorderRadius.all(
+            Radius.circular(10.0),
+          ),
         ),
         child: Column(
           children: [

@@ -42,6 +42,9 @@ dependencies:
   intl: ^0.17.0
   uuid: ^3.0.5
 
+  smooth_page_indicator: ^1.0.0+2
+  webview_flutter: ^3.0.0
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -77,6 +80,7 @@ flutter:
     - assets/magazine_pics/
     - assets/profile_pics/
     - assets/sample_data/
+    - assets/fooderlich_assets/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

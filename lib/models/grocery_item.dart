@@ -1,10 +1,6 @@
 import 'package:flutter/painting.dart';
 
-enum Importance {
-  low,
-  medium,
-  high,
-}
+enum Importance { low, medium, high }
 
 class GroceryItem {
   final String id;
@@ -25,7 +21,7 @@ class GroceryItem {
     this.isComplete = false,
   });
 
-  GroceryItem copywith({ // this will be useful later, when you manage the state of the items
+  GroceryItem copyWith({
     String? id,
     String? name,
     Importance? importance,

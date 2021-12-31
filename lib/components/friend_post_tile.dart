@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/components/circle_image.dart';
-import 'package:fooderlich/models/models.dart';
 
-class FriendPostTitle extends StatelessWidget {
+import '../components/components.dart';
+import '../models/models.dart';
+
+class FriendPostTile extends StatelessWidget {
   final Post post;
-  FriendPostTitle({required this.post});
+
+  FriendPostTile({
+    required this.post,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -13,19 +17,18 @@ class FriendPostTitle extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.start,
       children: [
         CircleImage(
-          imageProvider: AssetImage(post.profileImageUrl),
+          imageProvider: AssetImage('${post.profileImageUrl}'),
           imageRadius: 20,
         ),
-        SizedBox(
-          width: 16,
-        ),
+        SizedBox(width: 16),
         Expanded(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              Text(post.comment),
               Text(
                 '${post.timestamp} mins ago',
-                style: TextStyle(fontWeight: FontWeight.w700),
+                style: Theme.of(context).textTheme.bodyText1,
               ),
             ],
           ),
