@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:fooderlich/models/models.dart';
 import 'package:fooderlich/screens/empty_grocery_screen.dart';
 import 'package:fooderlich/screens/grocery_item_screen.dart';
+import 'package:fooderlich/screens/grocery_list_screen.dart';
 import 'package:provider/provider.dart';
 
 class GroceryScreen extends StatelessWidget {
@@ -39,8 +40,8 @@ class GroceryScreen extends StatelessWidget {
       builder: (context, manager, child) {
         // 3
         if (manager.groceryItems.isNotEmpty) {
-          // TODO 25: Add GroceryListScreen
-          return Container();
+          //Add GroceryListScreen
+          return GroceryListScreen(manager: manager,);
         } else {
           // 4
           return EmptyGroceryScreen();
