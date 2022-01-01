@@ -33,7 +33,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {
-            // TODO: Close Profile Screen
+            //  Close Profile Screen
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnProfile(false);
           },
         ),
       ),
