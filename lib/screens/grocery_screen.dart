@@ -5,14 +5,14 @@ import '../models/models.dart';
 import 'screens.dart';
 
 class GroceryScreen extends StatelessWidget {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         child: Icon(Icons.add),
         onPressed: () {
-          // TODO: Create New Item
+          //  Create New Item
+          Provider.of<GroceryManager>(context, listen: false).createNewItem();
         },
       ),
       body: buildGroceryScreen(),
