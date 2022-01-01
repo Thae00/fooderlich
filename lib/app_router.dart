@@ -70,7 +70,9 @@ class AppRouter extends RouterDelegate
               // No create
             },
           ),
-        // TODO: Add Profile Screen
+        //  Add Profile Screen
+        if (profileManager.didSelectUser)
+          ProfileScreen.page(profileManager.getUser),
         // TODO: Add WebView Screen
       ],
     );
