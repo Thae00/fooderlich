@@ -10,7 +10,9 @@ class ProfileScreen extends StatefulWidget {
     return MaterialPage(
       name: FooderlichPages.profilePath,
       key: ValueKey(FooderlichPages.profilePath),
-      child: ProfileScreen(user: user,),
+      child: ProfileScreen(
+        user: user,
+      ),
     );
   }
 
@@ -57,7 +59,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         ListTile(
           title: Text('View raywenderlich.com'),
           onTap: () {
-            // TODO: Open raywenderlich.com webview
+            // Open raywenderlich.com webview
+            Provider.of<ProfileManager>(context, listen: false)
+                .tapOnRaywenderlich(true);
           },
         ),
         ListTile(
