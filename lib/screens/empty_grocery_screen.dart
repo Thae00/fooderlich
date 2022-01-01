@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:fooderlich/models/app_state_manager.dart';
+import 'package:provider/provider.dart';
 
 class EmptyGroceryScreen extends StatelessWidget {
   @override
@@ -33,7 +35,7 @@ class EmptyGroceryScreen extends StatelessWidget {
               ),
               color: Colors.green,
               onPressed: () {
-                // TODO: Update user's selected tab
+                //  Update user's selected tab
               },
             ),
           ],
