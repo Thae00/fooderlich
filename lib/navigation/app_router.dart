@@ -96,9 +96,30 @@ class AppRouter extends RouterDelegate<AppLink> // Add <AppLink>
     return true;
   }
 
-  // TODO: Convert app state to applink
+  // Convert app state to applink
+  AppLink getCurrentPath() {
+    if (!appStateManager.isLoggedIn) {
+      return AppLink(location: AppLink.loginPath);
+    } else if (!appStateManager.isOnboardingComplete) {
+      return AppLink(location: AppLink.onboardingPath);
+    } else if (profileManager.didSelectUser) {
+      return AppLink(location: AppLink.profilePath);
+    } else if (groceryManager.isCreatingNewItem) {
+      return AppLink(location: AppLink.itemPath);
+    } else if (groceryManager.selectedGroceryItem != null) {
+      final id = groceryManager.selectedGroceryItem?.id;
+      return AppLink(location: AppLink.itemPath, itemId: id);
+    } else {
+      return AppLink(
+        location: AppLink.homePath,
+        currentTab: appStateManager.getSelectedTab,
+      );
+    }
+  }
 
-  // TODO: Apply configuration helper
+  //  Apply configuration helper
+  @override
+  AppLink get currentConfiguration => getCurrentPath();
 
   // Replace setNewRoutePath
   @override
@@ -127,7 +148,4 @@ class AppRouter extends RouterDelegate<AppLink> // Add <AppLink>
         break;
     }
   }
-
-  @override
-  Future<void> setNewRoutePath(configuration) async => null;
 }

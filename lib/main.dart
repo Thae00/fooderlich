@@ -8,13 +8,11 @@ import 'navigation/app_router.dart';
 
 void main() {
   runApp(
-    const Fooderlich(),
+    Fooderlich(),
   );
 }
 
 class Fooderlich extends StatefulWidget {
-  const Fooderlich({Key? key}) : super(key: key);
-
   @override
   _FooderlichState createState() => _FooderlichState();
 }
@@ -60,6 +58,7 @@ class _FooderlichState extends State<Fooderlich> {
           // Replace with Material.router
 
           return MaterialApp.router(
+            debugShowCheckedModeBanner: false,
             theme: theme,
             title: 'Fooderlich',
             backButtonDispatcher: RootBackButtonDispatcher(),
