@@ -1,18 +1,17 @@
+import 'package:flutter/foundation.dart' show kIsWeb;
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../components/circle_image.dart';
 import '../models/models.dart';
 
 class ProfileScreen extends StatefulWidget {
-  // ProfileScreen MaterialPage Helper
   static MaterialPage page(User user) {
     return MaterialPage(
       name: FooderlichPages.profilePath,
       key: ValueKey(FooderlichPages.profilePath),
-      child: ProfileScreen(
-        user: user,
-      ),
+      child: ProfileScreen(user: user),
     );
   }
 
@@ -33,7 +32,6 @@ class _ProfileScreenState extends State<ProfileScreen> {
         leading: IconButton(
           icon: Icon(Icons.close),
           onPressed: () {
-            //  Close Profile Screen
             Provider.of<ProfileManager>(context, listen: false)
                 .tapOnProfile(false);
           },
@@ -60,18 +58,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         buildDarkModeRow(),
         ListTile(
           title: Text('View raywenderlich.com'),
-          onTap: () {
-            // Open raywenderlich.com webview
-            Provider.of<ProfileManager>(context, listen: false)
-                .tapOnRaywenderlich(true);
+          onTap: () async {
+            if (kIsWeb) {
+              await launch('https://www.raywenderlich.com/');
+            } else {
+              Provider.of<ProfileManager>(context, listen: false)
+                  .tapOnRaywenderlich(true);
+            }
           },
         ),
         ListTile(
           title: Text('Log out'),
           onTap: () {
-            //  Logout user
+            // 1
             Provider.of<ProfileManager>(context, listen: false)
                 .tapOnProfile(false);
+            // 2
             Provider.of<AppStateManager>(context, listen: false).logout();
           },
         )
@@ -105,12 +107,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
           imageProvider: AssetImage(widget.user.profileImageUrl),
           imageRadius: 60.0,
         ),
-        SizedBox(height: 16.0),
+        const SizedBox(height: 16.0),
         Text(
           widget.user.firstName,
-          style: TextStyle(
-            fontSize: 21,
-          ),
+          style: TextStyle(fontSize: 21),
         ),
         Text(widget.user.role),
         Text(
