@@ -1,12 +1,17 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-import 'package:fooderlich/models/fooderlich_pages.dart';
-import 'package:fooderlich/models/models.dart';
-import 'package:fooderlich/screens/screens.dart';
+import 'package:fooderlich/navigation/app_link.dart';
 
-class AppRouter extends RouterDelegate
-    with ChangeNotifier, PopNavigatorRouterDelegateMixin {
+import '../models/models.dart';
+import '../screens/screens.dart';
+
+class AppRouter extends RouterDelegate<AppLink> // Add <AppLink>
+    with
+        ChangeNotifier,
+        PopNavigatorRouterDelegateMixin {
   @override
   final GlobalKey<NavigatorState> navigatorKey;
+
   final AppStateManager appStateManager;
   final GroceryManager groceryManager;
   final ProfileManager profileManager;
@@ -16,12 +21,11 @@ class AppRouter extends RouterDelegate
     required this.groceryManager,
     required this.profileManager,
   }) : navigatorKey = GlobalKey<NavigatorState>() {
-    //  Add Listeners
     appStateManager.addListener(notifyListeners);
     groceryManager.addListener(notifyListeners);
     profileManager.addListener(notifyListeners);
   }
-  // Dispose listeners
+
   @override
   void dispose() {
     appStateManager.removeListener(notifyListeners);
@@ -33,75 +37,95 @@ class AppRouter extends RouterDelegate
   @override
   Widget build(BuildContext context) {
     return Navigator(
-      // Add onPopPage
+      key: navigatorKey,
       onPopPage: _handlePopPage,
-      // 9
       pages: [
-        //  Add SplashScreen
-        if (!appStateManager.isInitialized) SplashScreen.page(),
-        //  Add LoginScreen
-        if (appStateManager.isInitialized && !appStateManager.isLoggedIn)
+        if (!appStateManager.isInitialized) ...[
+          SplashScreen.page(),
+        ] else if (!appStateManager.isLoggedIn) ...[
           LoginScreen.page(),
-        //  Add OnboardingScreen
-        if (appStateManager.isLoggedIn && !appStateManager.isOnboardingComplete)
+        ] else if (!appStateManager.isOnboardingComplete) ...[
           OnboardingScreen.page(),
-        //  Add Home
-        if (appStateManager.isOnboardingComplete)
+        ] else ...[
           Home.page(appStateManager.getSelectedTab),
-        //  Create new item
-        if (groceryManager.isCreatingNewItem)
-          GroceryItemScreen.page(
-            onCreate: (item) {
+          if (groceryManager.isCreatingNewItem)
+            GroceryItemScreen.page(onCreate: (item) {
               groceryManager.addItem(item);
-            },
-            onUpdate: (item, index) {
-              //No update
-            },
-          ),
-        //  Select GroceryItemScreen
-        if (groceryManager.selectedIndex != -1)
-          GroceryItemScreen.page(
-            item: groceryManager.selectedGroceryItem,
-            index: groceryManager.selectedIndex,
-            onUpdate: (item, index) {
-              groceryManager.updateItem(item, index);
-            },
-            onCreate: (_) {
-              // No create
-            },
-          ),
-        //  Add Profile Screen
-        if (profileManager.didSelectUser)
-          ProfileScreen.page(profileManager.getUser),
-        //  Add WebView Screen
-        if (profileManager.didTapOnRaywenderlich) WebViewScreen.page(),
+            }, onUpdate: (item, index) {
+              // No update
+            }),
+          if (groceryManager.selectedIndex != -1)
+            GroceryItemScreen.page(
+                item: groceryManager.selectedGroceryItem,
+                index: groceryManager.selectedIndex,
+                onCreate: (_) {
+                  // No create
+                },
+                onUpdate: (item, index) {
+                  groceryManager.updateItem(item, index);
+                }),
+          if (profileManager.didSelectUser)
+            ProfileScreen.page(profileManager.getUser),
+          if (profileManager.didTapOnRaywenderlich) WebViewScreen.page(),
+        ]
       ],
     );
   }
 
-  //Add _handlePopPage
   bool _handlePopPage(Route<dynamic> route, result) {
     if (!route.didPop(result)) {
       return false;
     }
-    //  Handle Onboarding and splash
+
     if (route.settings.name == FooderlichPages.onboardingPath) {
       appStateManager.logout();
     }
-    // Handle state when user closes grocery item screen
+
     if (route.settings.name == FooderlichPages.groceryItemDetails) {
       groceryManager.groceryItemTapped(-1);
     }
-    // Handle state when user closes profile screen
+
     if (route.settings.name == FooderlichPages.profilePath) {
       profileManager.tapOnProfile(false);
     }
-    //  Handle state when user closes WebView screen
+
     if (route.settings.name == FooderlichPages.raywenderlich) {
-      profileManager.tapOnProfile(false);
+      profileManager.tapOnRaywenderlich(false);
     }
-    // 6
+
     return true;
+  }
+
+  // TODO: Convert app state to applink
+
+  // TODO: Apply configuration helper
+
+  // Replace setNewRoutePath
+  @override
+  Future<void> setNewRoutePath(AppLink newLink) async {
+    switch (newLink.location) {
+      case AppLink.profilePath:
+        profileManager.tapOnProfile(true);
+        break;
+      case AppLink.itemPath:
+        final itemId = newLink.itemId;
+        if (itemId != null) {
+          groceryManager.setSelectedGroceryItem(itemId);
+        } else {
+          groceryManager.createNewItem();
+        }
+        profileManager.tapOnProfile(false);
+        break;
+
+      case AppLink.homePath:
+        appStateManager.goToTab(newLink.currentTab ?? 0);
+        profileManager.tapOnProfile(false);
+        groceryManager.groceryItemTapped(-1);
+        break;
+
+      default:
+        break;
+    }
   }
 
   @override
