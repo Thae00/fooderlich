@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-
 class AppLink {
   static const String homePath = '/home';
   static const String onboardingPath = '/onboarding';

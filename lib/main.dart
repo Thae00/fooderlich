@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/navigation/app_router.dart';
+import 'package:fooderlich/navigation/app_route_parser.dart';
 import 'package:provider/provider.dart';
 
 import 'fooderlich_theme.dart';
 import 'models/models.dart';
+import 'navigation/app_router.dart';
 
 void main() {
   runApp(
-    Fooderlich(),
+    const Fooderlich(),
   );
 }
 
 class Fooderlich extends StatefulWidget {
+  const Fooderlich({Key? key}) : super(key: key);
+
   @override
   _FooderlichState createState() => _FooderlichState();
 }
@@ -19,37 +22,32 @@ class Fooderlich extends StatefulWidget {
 class _FooderlichState extends State<Fooderlich> {
   final _groceryManager = GroceryManager();
   final _profileManager = ProfileManager();
-  //  Create AppStateManager
   final _appStateManager = AppStateManager();
-
-  // Define AppRouter
   late AppRouter _appRouter;
+  //  Initialize RouteInformationParser
+  final routeParser = AppRouteParser();
 
-  // Initialize app router
   @override
   void initState() {
-    super.initState();
     _appRouter = AppRouter(
       appStateManager: _appStateManager,
       groceryManager: _groceryManager,
       profileManager: _profileManager,
     );
+    super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider(
-          create: (context) => _groceryManager,
-        ),
-        ChangeNotifierProvider(
-          create: (context) => _profileManager,
-        ),
-        //  Add AppStateManager ChangeNotifierProvider
+        ChangeNotifierProvider(create: (context) => _groceryManager),
         ChangeNotifierProvider(
           create: (context) => _appStateManager,
         ),
+        ChangeNotifierProvider(
+          create: (context) => _profileManager,
+        )
       ],
       child: Consumer<ProfileManager>(
         builder: (context, profileManager, child) {
@@ -59,17 +57,14 @@ class _FooderlichState extends State<Fooderlich> {
           } else {
             theme = FooderlichTheme.light();
           }
+          // Replace with Material.router
 
-          return MaterialApp(
-            debugShowCheckedModeBanner: false,
+          return MaterialApp.router(
             theme: theme,
             title: 'Fooderlich',
-            //  Replace with Router widget
-            home: Router(
-              routerDelegate: _appRouter,
-              // Add backButtonDispatcher
-              backButtonDispatcher: RootBackButtonDispatcher(),
-            ),
+            backButtonDispatcher: RootBackButtonDispatcher(),
+            routeInformationParser: routeParser,
+            routerDelegate: _appRouter,
           );
         },
       ),
