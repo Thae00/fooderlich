@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fooderlich/app_router.dart';
+import 'package:fooderlich/navigation/app_router.dart';
 import 'package:provider/provider.dart';
 
 import 'fooderlich_theme.dart';
